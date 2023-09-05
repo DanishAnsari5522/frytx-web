@@ -14,12 +14,12 @@ import { useRouter } from 'next/router';
 export const SidebarWrapper = () => {
    const router = useRouter();
    const { collapsed, setCollapsed } = useSidebarContext();
-   const [auth, setAuth] = useState(true);
+   // const [auth, setAuth] = useState(true);
    useEffect(() => {
-      let auth1 = localStorage.getItem('user');
-      if (auth1) {
-         setAuth(true);
-      }
+      // let auth1 = localStorage.getItem('user');
+      // if (auth1) {
+      //    setAuth(true);
+      // }
    })
 
    return (
@@ -48,8 +48,10 @@ export const SidebarWrapper = () => {
                   <SidebarItem
                      title="Home"
                      icon={<HomeIcon />}
-                     isActive={auth ? router.pathname === '/' : router.pathname === '/accounts'}
-                     href={auth ? "/" : "accounts"}
+                     // isActive={auth ? router.pathname === '/' : router.pathname === '/accounts'}
+                     // href={auth ? "/" : "accounts"}
+                     isActive={router.pathname === '/'}
+                     href="/"
                   />
                   <SidebarMenu title="Main Menu">
                      <SidebarItem
