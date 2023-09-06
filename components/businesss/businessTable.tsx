@@ -12,7 +12,7 @@ import Image from 'next/image';
 import Indiamartimg from '../../public/indiamart.jpg';
 
 
-export default function BusinessTable() {
+const BusinessTable = () => {
     const router = useRouter()
     const [dataAllInd, setDataAllInd] = useState([]);
     const [dataAllGog, setDataAllGog] = useState([]);
@@ -23,8 +23,8 @@ export default function BusinessTable() {
     // const [dataGoogle, setDataGoogle] = useState([]);
     const [visible, setVisible] = React.useState(false);
     const [visibleView, setVisibleView] = React.useState(false);
-    const [url, setUrl] = useState();
-    const [informationText, setInformationText] = useState();
+    const [url, setUrl] = useState('');
+    const [informationText, setInformationText] = useState('');
     const [businessType, setBusinessType] = useState('');
     const [category, setCategory] = useState('');
     const [selected, setSelected] = React.useState('');
@@ -46,21 +46,21 @@ export default function BusinessTable() {
     };
     const [cate, setCate] = useState(getInitialState);
 
-    const handleChange = (e) => {
+    const handleChange = (selectedValue: string) => {
         getInitialState();
-        setCate(e.target.value);
-        console.log(e.target.value);
+        setCate(selectedValue);
+        console.log(selectedValue)
         // console.log("this is Cate" + cate + "this is  from Select " + e.target.value);
-        getBusiness(e.target.value);
+        getBusiness(selectedValue);
 
     };
 
-    const handlerView = (dan) => {
-        // console.log(dan);
-        setVisibleView(true);
-    }
+    // const handlerView = (dan) => {
+    //     // console.log(dan);
+    //     setVisibleView(true);
+    // }
 
-    const handler = (dan, name, gst) => {
+    const handler = (dan: any, name: any, gst: any) => {
         setCategory(dan);
         // console.log(dan);
         // console.log(name);
@@ -97,12 +97,12 @@ export default function BusinessTable() {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     } else if (data.status == true) {
                         alert("Business Added")
                         setLoding(false);
                         setVisible(false);
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     }
                 }
             )
@@ -121,7 +121,7 @@ export default function BusinessTable() {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     } else if (data.status == true) {
                         console.log(data);
                         if (data.message.name == name) {
@@ -141,11 +141,11 @@ export default function BusinessTable() {
                                     if (data.status == false) {
                                         alert("error occurs Plase Enter Valid Business")
                                         setInformationText("error");
-                                        router.reload("/admin/business");
+                                        router.replace("/admin/business");
                                     } else if (data.status == true) {
                                         setLoding(false);
                                         setVisible(false);
-                                        router.reload("/admin/business");
+                                        router.replace("/admin/business");
                                     }
                                 }
                             )
@@ -154,17 +154,17 @@ export default function BusinessTable() {
                         }
                         setLoding(false);
                         setVisible(false);
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     }
                 }
             )
         }
     };
 
-    const getBusiness = async (dz) => {
+    const getBusiness = async (dz: any) => {
         // console.log(selectedValue);
         if (dz == 'india_mart') {
-            console.log("danishzinat" + dz);
+            // console.log("danishzinat" + dz);
             let result = await fetch('https://frytx-backend.onrender.com/v1/business/indiamartBusiness', {
                 method: 'GET',
                 headers: {
@@ -182,7 +182,7 @@ export default function BusinessTable() {
                 }
             )
         } if (dz == 'google') {
-            console.log("danishzinat" + dz);
+            // console.log("danishzinat" + dz);
 
             let result1 = await fetch('https://frytx-backend.onrender.com/v1/business/googleBusiness', {
                 method: 'GET',
@@ -201,7 +201,7 @@ export default function BusinessTable() {
                 }
             )
         } if (dz == 'all') {
-            console.log("danishzinat" + dz);
+            // console.log("danish" + dz);
 
             let result = await fetch('https://frytx-backend.onrender.com/v1/business/indiamartBusiness', {
                 method: 'GET',
@@ -212,7 +212,7 @@ export default function BusinessTable() {
                 async data => {
                     if (data.status == false) {
                     } else if (data.status == true) {
-                        console.log(data.message.businessList);
+                        // console.log(data.message.businessList);
                         setDataAllInd(data.message.businessList);
                         setBusinessType('India_Mart')
 
@@ -230,7 +230,7 @@ export default function BusinessTable() {
                 async data => {
                     if (data.status == false) {
                     } else if (data.status == true) {
-                        console.log(data.message.businessList);
+                        // console.log(data.message.businessList);
                         setDataAllGog(data.message.businessList)
                         setBusinessType('google')
                     }
@@ -260,7 +260,7 @@ export default function BusinessTable() {
         )
     }
 
-    const listByGST = async (name, gst) => {
+    const listByGST = async (name: any, gst: any) => {
         console.log(name);
         console.log(gst);
         setLodingGST(true);
@@ -290,7 +290,7 @@ export default function BusinessTable() {
         <>
             <div className='flex'>
                 <AddBusiness />
-                <select value={cate} onChange={handleChange} className='p-0 mb-2 w-1/4 border-2 rounded-xl ml-4'>
+                <select value={cate} onChange={(e) => handleChange(e.target.value)} className='p-0 mb-2 w-1/4 border-2 rounded-xl ml-4'>
                     <option value='all'>All Business</option>
                     <option value="india_mart">India Mart</option>
                     <option value="google">Google</option>
@@ -425,24 +425,24 @@ export default function BusinessTable() {
                                 dataGoogle.map((value, key) => {
                                     return (
                                         <Table.Row key={1}>
-                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value.name}</p></Table.Cell>
-                                            <Table.Cell><p className="w-40 truncate ...">{value.location}{value.address}</p></Table.Cell>
-                                            <Table.Cell>{value.gst_number}</Table.Cell>
+                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
+                                            <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
+                                            <Table.Cell>{value['gst_number']}</Table.Cell>
                                             <Table.Cell>
                                                 <p className='flex'>
                                                     {dataStatus.map((value1, key1) => {
                                                         return (
                                                             <>
                                                                 {
-                                                                    value.gst_number == value1.gst_no ?
+                                                                    value['gst_number'] == value1['gst_no'] ?
                                                                         <p className='flex justify-between'>
-                                                                            {value1.india_mart == false ?
+                                                                            {value1['india_mart'] == false ?
                                                                                 <Image
                                                                                     src={Indiamartimg}
                                                                                     width={50}
                                                                                     height={50}
                                                                                     alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value.name, value.gst_number) }} />
+                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
                                                                                 :
                                                                                 <Image
                                                                                     src={Indiamartimg}
@@ -453,13 +453,13 @@ export default function BusinessTable() {
                                                                             }
 
 
-                                                                            {value1.google == false ?
+                                                                            {value1['google'] == false ?
                                                                                 <Image
                                                                                     src={googleimg}
                                                                                     width={50}
                                                                                     height={50}
                                                                                     alt="Picture of the author"
-                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value.name, value.gst_number) }} />
+                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value['name'], value['gst_number']) }} />
                                                                                 :
                                                                                 <Image
                                                                                     src={googleimg}
@@ -469,8 +469,8 @@ export default function BusinessTable() {
                                                                                     className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
                                                                             }
 
-                                                                            {value1.gst == false ?
-                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value.name, value.gst_number) }}>gst</p>
+                                                                            {value1['gst'] == false ?
+                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
                                                                                 :
                                                                                 <p className='p-2'>gst1</p>
                                                                             }
@@ -482,8 +482,8 @@ export default function BusinessTable() {
                                                 </p>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value.gst_number } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
-                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value._id } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
+                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
+                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
                                             </Table.Cell>
                                         </Table.Row>
                                     )
@@ -522,24 +522,24 @@ export default function BusinessTable() {
                                 dataIndiaMart.map((value, key) => {
                                     return (
                                         <Table.Row key={1}>
-                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value.name}</p></Table.Cell>
-                                            <Table.Cell><p className="w-40 truncate ...">{value.location}{value.address}</p></Table.Cell>
-                                            <Table.Cell>{value.gst_number}</Table.Cell>
+                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
+                                            <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
+                                            <Table.Cell>{value['gst_number']}</Table.Cell>
                                             <Table.Cell>
                                                 <p className='flex'>
                                                     {dataStatus.map((value1, key1) => {
                                                         return (
                                                             <>
                                                                 {
-                                                                    value.gst_number == value1.gst_no ?
+                                                                    value['gst_number'] == value1['gst_no'] ?
                                                                         <p className='flex justify-between'>
-                                                                            {value1.india_mart == false ?
+                                                                            {value1['india_mart'] == false ?
                                                                                 <Image
                                                                                     src={Indiamartimg}
                                                                                     width={50}
                                                                                     height={50}
                                                                                     alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value.name, value.gst_number) }} />
+                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
                                                                                 :
                                                                                 <Image
                                                                                     src={Indiamartimg}
@@ -550,13 +550,13 @@ export default function BusinessTable() {
                                                                             }
 
 
-                                                                            {value1.google == false ?
+                                                                            {value1['google'] == false ?
                                                                                 <Image
                                                                                     src={googleimg}
                                                                                     width={50}
                                                                                     height={50}
                                                                                     alt="Picture of the author"
-                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value.name, value.gst_number) }} />
+                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value['name'], value['gst_number']) }} />
                                                                                 :
                                                                                 <Image
                                                                                     src={googleimg}
@@ -566,8 +566,8 @@ export default function BusinessTable() {
                                                                                     className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
                                                                             }
 
-                                                                            {value1.gst == false ?
-                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value.name, value.gst_number) }}>gst</p>
+                                                                            {value1['gst'] == false ?
+                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
                                                                                 :
                                                                                 <p className='p-2'>gst1</p>
                                                                             }
@@ -579,8 +579,8 @@ export default function BusinessTable() {
                                                 </p>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value.gst_number } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
-                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value._id } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
+                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
+                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
                                             </Table.Cell>
                                         </Table.Row>
                                     )
@@ -617,24 +617,24 @@ export default function BusinessTable() {
                                 dataAllInd.map((value, key) => {
                                     return (
                                         <Table.Row key={1}>
-                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value.name}</p></Table.Cell>
-                                            <Table.Cell><p className="w-40 truncate ...">{value.location}{value.address}</p></Table.Cell>
-                                            <Table.Cell>{value.gst_number}</Table.Cell>
+                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
+                                            <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
+                                            <Table.Cell>{value['gst_number']}</Table.Cell>
                                             <Table.Cell>
                                                 <p className='flex'>
                                                     {dataStatus.map((value1, key1) => {
                                                         return (
                                                             <>
                                                                 {
-                                                                    value.gst_number == value1.gst_no ?
+                                                                    value['gst_number'] == value1['gst_no'] ?
                                                                         <p className='flex justify-between'>
-                                                                            {value1.india_mart == false ?
+                                                                            {value1['india_mart'] == false ?
                                                                                 <Image
                                                                                     src={Indiamartimg}
                                                                                     width={50}
                                                                                     height={50}
                                                                                     alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value.name, value.gst_number) }} />
+                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
                                                                                 :
                                                                                 <Image
                                                                                     src={Indiamartimg}
@@ -645,13 +645,13 @@ export default function BusinessTable() {
                                                                             }
 
 
-                                                                            {value1.google == false ?
+                                                                            {value1['google'] == false ?
                                                                                 <Image
                                                                                     src={googleimg}
                                                                                     width={50}
                                                                                     height={50}
                                                                                     alt="Picture of the author"
-                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value.name, value.gst_number) }} />
+                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value[name], value['gst_number']) }} />
                                                                                 :
                                                                                 <Image
                                                                                     src={googleimg}
@@ -661,8 +661,8 @@ export default function BusinessTable() {
                                                                                     className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
                                                                             }
 
-                                                                            {value1.gst == false ?
-                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value.name, value.gst_number) }}>gst</p>
+                                                                            {value1['gst'] == false ?
+                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
                                                                                 :
                                                                                 <p className='p-2'>gst1</p>
                                                                             }
@@ -674,38 +674,13 @@ export default function BusinessTable() {
                                                 </p>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value.gst_number } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
-                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value._id } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
-                                            </Table.Cell>
-                                        </Table.Row>
-                                    )
-                                })
-
-                            }
-
-                            {
-                                dataAllGog.map((value, key) => {
-                                    console.log('All');
-
-                                    return (
-
-                                        <Table.Row key={key}>
-                                            <Table.Cell><p class="w-40 truncate ...">{value.name}</p></Table.Cell>
-                                            <Table.Cell><p class="w-40 truncate ...">{value.address}</p></Table.Cell>
-                                            <Table.Cell>{value.gst_number}</Table.Cell>
-                                            <Table.Cell>{businessType}</Table.Cell>
-                                            <Table.Cell>
-                                                {/* <button onClick={() => { handlerView(value.name) }}><EyeIcon size={20} fill="#979797" /></button> */}
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value.gst_number } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
-
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value.gst_number } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" /></button></Link>
-
+                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
+                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
                                             </Table.Cell>
                                         </Table.Row>
                                     )
                                 })
                             }
-
                         </Table.Body>
                     </Table> :
                     <p></p>
@@ -715,3 +690,6 @@ export default function BusinessTable() {
         </>
     );
 }
+
+
+export default BusinessTable;

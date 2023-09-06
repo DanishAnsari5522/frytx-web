@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Tabledan from './Table';
+// import Tabledan from './Table';
 
 export default function Users() {
     const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ export default function Users() {
     else
         return (
             <>
-                <Tabledan type={'user'} title={'Employee'} columns={['Account', 'Company', 'Status', 'Action']}  />
+                {/* <Tabledan type={'user'} title={'Employee'} columns={['Account', 'Company', 'Status', 'Action']}  /> */}
             </>
         )
 }

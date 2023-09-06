@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import LandingPageHeader from '../../navbar/landingpage-header';
 const LoginComp = () => {
     const router = useRouter()
-    const [phone, setPhone] = useState();
-    const [password, setPassword] = useState();
-    const [informationText, setInformationText] = useState();
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [informationText, setInformationText] = useState('');
     const loginButton = async () => {
         // console.log("hii");
         // console.log(phone, password);

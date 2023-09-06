@@ -5,8 +5,8 @@ import { Flex } from '../styles/flex';
 export const AddBusiness = () => {
     const router = useRouter()
     const [visible, setVisible] = React.useState(false);
-    const [url, setUrl] = useState();
-    const [informationText, setInformationText] = useState();
+    const [url, setUrl] = useState('');
+    const [informationText, setInformationText] = useState('');
     const handler = () => setVisible(true);
     const [loading, setLoding] = useState(false);
     const [selected, setSelected] = React.useState('');
@@ -44,11 +44,11 @@ export const AddBusiness = () => {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     } else if (data.status == true) {
                         setLoding(false);
                         setVisible(false);
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     }
                 }
             )
@@ -67,11 +67,11 @@ export const AddBusiness = () => {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     } else if (data.status == true) {
                         setLoding(false);
                         setVisible(false);
-                        router.reload("/admin/business");
+                        router.replace("/admin/business");
                     }
                 }
             )
@@ -79,7 +79,7 @@ export const AddBusiness = () => {
     };
     return (
         <div>
-            <button auto onClick={handler} className='text-white mb-4 bg-blue-400 pl-3 pr-3 pt-2 pb-2 rounded-xl'>
+            <button onClick={handler} className='text-white mb-4 bg-blue-400 pl-3 pr-3 pt-2 pb-2 rounded-xl'>
                 Add Business
             </button>
             <Modal

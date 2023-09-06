@@ -3,7 +3,6 @@ import { Box } from '../styles/box';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { TestTable } from '../businesss/TestTable';
-import BusinessTable1 from '../businesss/businessTable1';
 // import TableLayoutDan from '../businesss/Test';
 
 // const Chart = dynamic(
@@ -38,7 +37,6 @@ export const Content = () => {
             {/* <TestTable /> */}
             {/* <TableLayout /> */}
             {/* <TableLayoutDan /> */}
-            {/* <BusinessTable1 /> */}
          </div>
       </Box>
    );

@@ -4,7 +4,8 @@ import { ReactTabulator } from 'react-tabulator';
 import { PageModule } from "react-tabulator/lib/types/TabulatorTypes";
 // import { Pagination } from "@nextui-org/react";
 // import {pagin}
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const columns = [
     { title: "Name", field: "name", headerFilter: "input", rowClickPopup: "Im a Popup", rowContextPopup: "Im a Popup" },
@@ -28,6 +29,7 @@ var data = [
 ];
 
 export const TestTable = () => {
+    const router = useRouter()
     const [data1, setData1] = useState([]);
     const getUser = async () => {
         let result = await fetch('https://frytx-backend.onrender.com/v1/user/getuser', {

@@ -4,7 +4,6 @@ import React from 'react';
 import { Flex } from '../styles/flex';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import UserTable from './userTable';
 import { Table } from "@nextui-org/react";
 import Link from 'next/link';
 import { EyeIcon } from './EyeIcon';
@@ -30,13 +29,13 @@ export const Accounts = () => {
    const [name, setName] = useState();
    const [email, setEmail] = useState();
    const [phone, setPhone] = useState();
-   const [nameUpdate, setNameUpdate] = useState();
-   const [emailUpdate, setEmailUpdate] = useState();
-   const [phoneUpdate, setPhoneUpdate] = useState();
-   const [informationTextUpdate, setInformationTextUpdate] = useState();
-   const [currentId, setCurrentId] = useState();
+   const [nameUpdate, setNameUpdate] = useState('');
+   const [emailUpdate, setEmailUpdate] = useState('');
+   const [phoneUpdate, setPhoneUpdate] = useState('');
+   const [informationTextUpdate, setInformationTextUpdate] = useState('');
+   const [currentId, setCurrentId] = useState('');
 
-   const handlerView = async (id) => {
+   const handlerView = async (id: string) => {
       let result = await fetch(`https://frytx-backend.onrender.com/v1/user/getuserbyid?id=${id}`, {
          method: 'GET',
          headers: {
@@ -59,8 +58,8 @@ export const Accounts = () => {
    }
 
 
-   const handlerEdit = async (id) => {
-      setCurrentId(id);
+   const handlerEdit = async (id: string) => {
+      setCurrentId(id)
       let result1 = await fetch(`https://frytx-backend.onrender.com/v1/user/getuserbyid?id=${id}`, {
          method: 'GET',
          headers: {
@@ -101,7 +100,8 @@ export const Accounts = () => {
          async data => {
             // console.log(data.user_detail);
             if (data.user_detail) {
-               router.reload("/admin/account");
+               getUser()
+               setVisibleEdit(false);
             }
          }
       )
@@ -298,16 +298,16 @@ export const Accounts = () => {
                      <Table.Column>ACTIONS</Table.Column>
                   </Table.Header>
                   <Table.Body>
-                     {data1.map((value, key) => {
+                     {data1.map((value, ind) => {
                         return (
-                           <Table.Row key={value._id}>
-                              <Table.Cell>{value.name}</Table.Cell>
-                              <Table.Cell>{value.email}</Table.Cell>
-                              <Table.Cell>{value.phone}</Table.Cell>
+                           <Table.Row key={ind}>
+                              <Table.Cell>{value['name']}</Table.Cell>
+                              <Table.Cell>{value['email']}</Table.Cell>
+                              <Table.Cell>{value['phone']}</Table.Cell>
                               <Table.Cell>
-                                 <button onClick={() => { handlerView(value._id) }}><EyeIcon size={20} fill="#979797" /></button>
+                                 <button onClick={() => { handlerView(value['_id']) }}><EyeIcon size={20} fill="#979797" /></button>
 
-                                 <button onClick={() => { handlerEdit(value._id) }}><EditIcon size={20} fill="#357a38" className="ml-3" /></button>
+                                 <button onClick={() => { handlerEdit(value['_id']) }}><EditIcon size={20} fill="#357a38" className="ml-3" /></button>
 
 
                                  <button><DeleteIcon size={20} fill="#FF0080" className="ml-3" /></button>

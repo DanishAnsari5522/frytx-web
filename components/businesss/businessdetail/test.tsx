@@ -1,27 +1,27 @@
 import React, { useState } from "react";
 // import "../App.css";
 
-const ReadMore = ({ children }) => {
-    const text = children;
-    const [isReadMore, setIsReadMore] = useState(true);
-    const toggleReadMore = () => {
-        setIsReadMore(!isReadMore);
-    };
-    return (
-        <p className="text">
-            {isReadMore ? text.slice(0, 250) : text}
-            <span onClick={toggleReadMore} className="read-or-hide cursor-pointer text-blue-500">
-                {isReadMore ? "...read more" : " show less"}
-            </span>
-        </p>
-    );
-};
+// const ReadMore = ({ children }) => {
+//     const text = children;
+//     const [isReadMore, setIsReadMore] = useState(true);
+//     const toggleReadMore = () => {
+//         setIsReadMore(!isReadMore);
+//     };
+//     return (
+//         <p className="text">
+//             {isReadMore ? text.slice(0, 250) : text}
+//             <span onClick={toggleReadMore} className="read-or-hide cursor-pointer text-blue-500">
+//                 {isReadMore ? "...read more" : " show less"}
+//             </span>
+//         </p>
+//     );
+// };
 
 const Content = () => {
     return (
         <div className="container">
             <h2>
-                <ReadMore>
+                {/* <ReadMore>
                     GeeksforGeeks: A Computer Science portal for geeks.
                     It contains well written, well thought and well explained
                     computer science, programming articles and quizzes.
@@ -30,7 +30,8 @@ const Content = () => {
                     Online and Classroom Courses ,Frequent Coding Competitions,
                     Webinars by Industry Experts, Internship opportunities, and Job
                     Opportunities. Knowledge is power!
-                </ReadMore>
+                </ReadMore> */}
+                test
             </h2>
         </div>
     );

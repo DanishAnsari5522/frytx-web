@@ -3,6 +3,7 @@ import { Flex } from '../styles/flex';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Table, Text } from "@nextui-org/react";
+import Link from 'next/link';
 
 export const AccountDetails = () => {
     const router = useRouter()
@@ -11,7 +12,7 @@ export const AccountDetails = () => {
     const { id } = router.query;
 
     const getUser = async () => {
-        let result = await fetch(`https://frytx-backend.onrender.com/v1/user/getuserbyid?id=${id}`, {
+        let result = await fetch(`http://localhost:4000/v1/user/getuserbyid?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -52,13 +53,13 @@ export const AccountDetails = () => {
         >
             <Text h3 className='mb-4 text-2xl'>Accounts Detail</Text>
 
-            {/* {data1 ?
+            {data1 ?
                 <div>
-                    <div className='flex'>Name :- <p className='text-xl font-medium ml-2'>{data1.name}</p></div>
+                    {/* <div className='flex'>Name :- <p className='text-xl font-medium ml-2'>{data1.name}</p></div>
                     <div className='flex'>Email :- <p className='text-xl font-medium ml-2'>{data1.email}</p></div>
-                    <div className='flex'>Phone :-<p className='text-xl font-medium ml-2'>{data1.phone}</p></div>
+                    <div className='flex'>Phone :-<p className='text-xl font-medium ml-2'>{data1.phone}</p></div> */}
                 </div>
-                : <p>Dani</p>} */}
+                : <p>Dani</p>}
 
             {/* <div>
                 {data1 ?

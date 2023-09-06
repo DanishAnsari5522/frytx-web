@@ -12,8 +12,14 @@ export const UserDropdown = () => {
       router.reload();
    }
    useEffect(() => {
-      const auths = JSON.parse(localStorage.getItem('user'));
-      setName(auths.data.name)
+      // const auths = JSON.parse(localStorage.getItem('user'));
+      // setName(auths.data.name)
+      const storedUser = localStorage.getItem('user');
+      if (storedUser !== null) {
+         const auths = JSON.parse(storedUser);
+         setName(auths.data.name);
+      }
+
 
    })
    return (

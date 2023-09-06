@@ -5,17 +5,17 @@ import { useRouter } from 'next/router';
 import { Table, Text } from "@nextui-org/react";
 import Link from 'next/link';
 
-export const AccountUpdate = (props) => {
+export const AccountUpdate = () => {
     const router = useRouter()
     const [data1, setData1] = useState([]);
     
 
     const { id } = router.query;
 
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [phone, setPhone] = useState();
-    const [informationText, setInformationText] = useState();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [informationText, setInformationText] = useState('');
 
     const UpdateDetail = async () => {
         const _id=id;

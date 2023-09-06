@@ -6,12 +6,12 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import LandingPageHeader from '../../navbar/landingpage-header';
 const SignupComp = () => {
     const router = useRouter();
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [phone, setPhone] = useState();
-    const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
-    const [informationText, setInformationText] = useState();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [informationText, setInformationText] = useState('');
 
     const registerButton = async () => {
         // console.log("hii");
