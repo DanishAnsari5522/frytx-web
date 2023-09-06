@@ -37,7 +37,7 @@ const SignupComp = () => {
                 .then(res => res.json()).then(
                     async data => {
                         // console.log(data);
-                        window.location.href = '/email_verification'
+                        // window.location.href = '/email_verification'
                         if (data.success == false) {
                             setInformationText(data.message);
                         } else if (data.success == true) {
