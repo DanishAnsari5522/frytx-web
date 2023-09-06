@@ -49,21 +49,22 @@ export default function BusinessTable() {
     const handleChange = (e) => {
         getInitialState();
         setCate(e.target.value);
-        console.log("this is Cate" + cate + "this is  from Select " + e.target.value);
+        console.log(e.target.value);
+        // console.log("this is Cate" + cate + "this is  from Select " + e.target.value);
         getBusiness(e.target.value);
 
     };
 
     const handlerView = (dan) => {
-        console.log(dan);
+        // console.log(dan);
         setVisibleView(true);
     }
 
     const handler = (dan, name, gst) => {
         setCategory(dan);
-        console.log(dan);
-        console.log(name);
-        console.log(gst);
+        // console.log(dan);
+        // console.log(name);
+        // console.log(gst);
         setName(name);
         setGst(gst);
         setVisible(true);
@@ -73,7 +74,7 @@ export default function BusinessTable() {
     }
 
     const closeHandler = async () => {
-        console.log(category);
+        // console.log(category);
         setLoding(true);
         // setVisibleView(false);
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjJlOGQwNzNlNzM4ZWVhZTAyZjY0ZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4NDg0MzU4OH0.O1q0hbTA_T9ITgDBX3YySJncinlXWLt_v5dYIqzZBmE';
@@ -82,7 +83,7 @@ export default function BusinessTable() {
             setLoding(false);
             setVisible(false);
         } else if (selected == 'india_mart') {
-            console.log("match");
+            // console.log("match");
             let result = await fetch('https://frytx-backend.onrender.com/v1/reviews/indiamartReviews', {
                 method: 'POST',
                 headers: {
@@ -92,8 +93,7 @@ export default function BusinessTable() {
                 body: JSON.stringify({ url })
             }).then(res => res.json()).then(
                 async data => {
-                    console.log(data);
-
+                    // console.log(data);
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
@@ -107,7 +107,7 @@ export default function BusinessTable() {
                 }
             )
         } else if (selected == 'google') {
-            console.log("match");
+            // console.log("match");
             let result = await fetch('https://frytx-backend.onrender.com/v1/business/googleBusiness', {
                 method: 'POST',
                 headers: {
@@ -117,8 +117,7 @@ export default function BusinessTable() {
                 body: JSON.stringify({ url })
             }).then(res => res.json()).then(
                 async data => {
-                    console.log(data);
-
+                    // console.log(data);
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
@@ -138,7 +137,7 @@ export default function BusinessTable() {
                                 body: JSON.stringify({ gstId: gst, businessName: name })
                             }).then(res => res.json()).then(
                                 async data => {
-                                    console.log(data);
+                                    // console.log(data);
                                     if (data.status == false) {
                                         alert("error occurs Plase Enter Valid Business")
                                         setInformationText("error");
@@ -175,7 +174,7 @@ export default function BusinessTable() {
                 async data => {
                     if (data.status == false) {
                     } else if (data.status == true) {
-                        console.log(data.message.businessList);
+                        // console.log(data.message.businessList);
                         setDataIndiaMart(data.message.businessList);
                         setBusinessType('India_Mart')
 
@@ -195,7 +194,7 @@ export default function BusinessTable() {
                     if (data.status == false) {
                     } else if (data.status == true) {
                         setDataAllInd([])
-                        console.log(data.message.businessList);
+                        // console.log(data.message.businessList);
                         setDataGoogle(data.message.businessList);
                         setBusinessType('google')
                     }
