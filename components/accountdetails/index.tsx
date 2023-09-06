@@ -3,9 +3,8 @@ import { Flex } from '../styles/flex';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Table, Text } from "@nextui-org/react";
-import Link from 'next/link';
 
-export const AccountDetails = (props) => {
+export const AccountDetails = () => {
     const router = useRouter()
     const [data1, setData1] = useState([]);
 
