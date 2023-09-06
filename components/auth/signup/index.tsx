@@ -38,9 +38,9 @@ const SignupComp = () => {
                     async data => {
                         // console.log(data);
                         // window.location.href = '/email_verification'
-                        if (data.success == false) {
+                        if (!data.data) {
                             setInformationText(data.message);
-                        } else if (data.success == true) {
+                        } else if (data.data) {
                             router.push("/");
                         }
                     }
