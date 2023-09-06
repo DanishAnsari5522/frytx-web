@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 export const SidebarWrapper = () => {
    const router = useRouter();
    const { collapsed, setCollapsed } = useSidebarContext();
-   // const [auth, setAuth] = useState(true);
+   // const [auth, setAuth] = useState(false);
    useEffect(() => {
       // let auth1 = localStorage.getItem('user');
       // if (auth1) {
