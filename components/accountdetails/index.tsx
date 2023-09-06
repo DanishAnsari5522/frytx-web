@@ -52,13 +52,13 @@ export const AccountDetails = () => {
         >
             <Text h3 className='mb-4 text-2xl'>Accounts Detail</Text>
 
-            {data1 ?
+            {/* {data1 ?
                 <div>
                     <div className='flex'>Name :- <p className='text-xl font-medium ml-2'>{data1.name}</p></div>
                     <div className='flex'>Email :- <p className='text-xl font-medium ml-2'>{data1.email}</p></div>
                     <div className='flex'>Phone :-<p className='text-xl font-medium ml-2'>{data1.phone}</p></div>
                 </div>
-                : <p>Dani</p>}
+                : <p>Dani</p>} */}
 
             {/* <div>
                 {data1 ?
