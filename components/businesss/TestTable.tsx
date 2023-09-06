@@ -30,7 +30,7 @@ var data = [
 export const TestTable = () => {
     const [data1, setData1] = useState([]);
     const getUser = async () => {
-        let result = await fetch('http://localhost:4000/v1/user/getuser', {
+        let result = await fetch('https://frytx-backend.onrender.com/v1/user/getuser', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

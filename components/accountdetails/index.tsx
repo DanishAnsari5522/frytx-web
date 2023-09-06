@@ -11,7 +11,7 @@ export const AccountDetails = () => {
     const { id } = router.query;
 
     const getUser = async () => {
-        let result = await fetch(`http://localhost:4000/v1/user/getuserbyid?id=${id}`, {
+        let result = await fetch(`https://frytx-backend.onrender.com/v1/user/getuserbyid?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
