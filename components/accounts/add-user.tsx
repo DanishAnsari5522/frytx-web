@@ -13,7 +13,7 @@ export const AddUser = () => {
 
    return (
       <div>
-         <button auto onClick={handler} className='text-white mb-4 bg-blue-400 pl-3 pr-3 pt-1 pb-1 rounded-xl'>
+         <button onClick={handler} type="button" className='text-white mb-4 bg-blue-400 pl-3 pr-3 pt-1 pb-1 rounded-xl'>
             Add User
          </button>
          <Modal
@@ -83,7 +83,7 @@ export const AddUser = () => {
             </Modal.Body>
             <Divider css={{ my: '$5' }} />
             <Modal.Footer>
-               <button auto onClick={closeHandler} className='text-white mb-4 bg-blue-400 pl-3 pr-3 pt-1 pb-1 rounded-xl'>
+               <button onClick={closeHandler} type="button" className='text-white mb-4 bg-blue-400 pl-3 pr-3 pt-1 pb-1 rounded-xl'>
                   Add User
                </button>
             </Modal.Footer>
