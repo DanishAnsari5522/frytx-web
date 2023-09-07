@@ -32,7 +32,7 @@ export const AddBusiness = () => {
             setLoding(false);
             setVisible(false);
         } else if (selected == 'india_mart') {
-            let result = await fetch('http://localhost:4000/v1/reviews/indiamartReviews', {
+            let result = await fetch('https://frytx-backend.onrender.com/v1/reviews/indiamartReviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export const AddBusiness = () => {
         } else if (selected == 'google') {
             // setVisible(true);
             console.log("match");
-            let result = await fetch('http://localhost:4000/v1/reviews/googleReviews', {
+            let result = await fetch('https://frytx-backend.onrender.com/v1/reviews/googleReviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
