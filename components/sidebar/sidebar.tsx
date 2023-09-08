@@ -10,16 +10,20 @@ import { SidebarItem } from './sidebar-item';
 import { SidebarMenu } from './sidebar-menu';
 import { useSidebarContext } from '../layout/layout-context';
 import { useRouter } from 'next/router';
+import { Tooltip } from '@nextui-org/react';
 
 export const SidebarWrapper = () => {
    const router = useRouter();
    const { collapsed, setCollapsed } = useSidebarContext();
-   // const [auth, setAuth] = useState(false);
+   const [auth, setAuth] = useState(false);
    useEffect(() => {
-      // let auth1 = localStorage.getItem('user');
-      // if (auth1) {
-      //    setAuth(true);
-      // }
+      let auth1 = localStorage.getItem('user');
+      if (auth1) {
+         console.log(JSON.parse(auth1).data['type']);
+         if (JSON.parse(auth1).data['phone'] === 9262786676) {
+            setAuth(true);
+         }
+      }
    })
 
    return (
@@ -54,86 +58,40 @@ export const SidebarWrapper = () => {
                      href="/"
                   />
                   <SidebarMenu title="Main Menu">
-                     <SidebarItem
-                        isActive={router.pathname === '/admin/account'}
-                        title="Accounts"
-                        icon={<AccountsIcon />}
-                        href="/admin/account"
-                     />
-                     <SidebarItem
-                        isActive={router.pathname === '/admin/business'}
-                        title="Business"
-                        icon={<BalanceIcon />}
-                        href="/admin/business"
-                     />
-                     {/* <SidebarItem
-                        isActive={router.pathname === '/payments'}
-                        title="Payments"
-                        icon={<PaymentsIcon />}
-                     />
-                     <CollapseItems
-                        icon={<BalanceIcon />}
-                        items={['Banks Accounts', 'Credit Cards', 'Loans']}
-                        title="Balances"
-                     />
 
-                     <SidebarItem
-                        isActive={router.pathname === '/customers'}
-                        title="Customers"
-                        icon={<CustomersIcon />}
-                     />
-                     <SidebarItem
-                        isActive={router.pathname === '/products'}
-                        title="Products"
-                        icon={<ProductsIcon />}
-                     />
-                     <SidebarItem
-                        isActive={router.pathname === '/reports'}
-                        title="Reports"
-                        icon={<ReportsIcon />}
-                     /> */}
+                     {
+                        auth ? <>
+                           <SidebarItem
+                              isActive={auth ? router.pathname === '/admin/account' : router.pathname === '/'}
+                              title="Accounts"
+                              icon={<AccountsIcon />}
+                              href="/admin/account"
+                           />
+                           <SidebarItem
+                              isActive={router.pathname === '/admin/business'}
+                              title="Business"
+                              icon={<BalanceIcon />}
+                              href={auth ? "/admin/business" : "/"}
+                           />
+                        </>
+                           : <>
+                              {/* <SidebarItem
+                                 isActive={router.pathname === '/admin/account'}
+                                 title="Accounts"
+                                 icon={<AccountsIcon />}
+                                 href="/admin/account"
+                              /> */}
+                              <SidebarItem
+                                 isActive={router.pathname === '/admin/business'}
+                                 title="Business"
+                                 icon={<BalanceIcon />}
+                                 href="/admin/business"
+                              />
+                           </>
+                     }
+
                   </SidebarMenu>
-
-                  {/* <SidebarMenu title="General">
-                     <SidebarItem
-                        isActive={router.pathname === '/developers'}
-                        title="Developers"
-                        icon={<DevIcon />}
-                     />
-                     <SidebarItem
-                        isActive={router.pathname === '/view'}
-                        title="View Test Data"
-                        icon={<ViewIcon />}
-                     />
-                     <SidebarItem
-                        isActive={router.pathname === '/settings'}
-                        title="Settings"
-                        icon={<SettingsIcon />}
-                     />
-                  </SidebarMenu> */}
-
-                  {/* <SidebarMenu title="Updates">
-                     <SidebarItem
-                        isActive={router.pathname === '/changelog'}
-                        title="Changelog"
-                        icon={<ChangeLogIcon />}
-                     />
-                  </SidebarMenu> */}
                </Sidebar.Body>
-               {/* <Sidebar.Footer>
-                  <Tooltip content={'Settings'} rounded color="primary">
-                     <SettingsIcon />
-                  </Tooltip>
-                  <Tooltip content={'Adjustments'} rounded color="primary">
-                     <FilterIcon />
-                  </Tooltip>
-                  <Tooltip content={'Profile'} rounded color="primary">
-                     <Avatar
-                        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                        size={'sm'}
-                     />
-                  </Tooltip>
-               </Sidebar.Footer> */}
             </Flex>
          </Sidebar>
       </Box>

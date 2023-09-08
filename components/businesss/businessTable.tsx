@@ -97,12 +97,12 @@ const BusinessTable = () => {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.replace("/admin/business");
+                        router.push("/admin/business");
                     } else if (data.status == true) {
                         alert("Business Added")
                         setLoding(false);
                         setVisible(false);
-                        router.replace("/admin/business");
+                        router.push("/admin/business");
                     }
                 }
             )
@@ -121,7 +121,7 @@ const BusinessTable = () => {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.replace("/admin/business");
+                        router.push("/admin/business");
                     } else if (data.status == true) {
                         console.log(data);
                         if (data.message.name == name) {
@@ -141,11 +141,11 @@ const BusinessTable = () => {
                                     if (data.status == false) {
                                         alert("error occurs Plase Enter Valid Business")
                                         setInformationText("error");
-                                        router.replace("/admin/business");
+                                        router.push("/admin/business");
                                     } else if (data.status == true) {
                                         setLoding(false);
                                         setVisible(false);
-                                        router.replace("/admin/business");
+                                        router.push("/admin/business");
                                     }
                                 }
                             )
@@ -154,7 +154,7 @@ const BusinessTable = () => {
                         }
                         setLoding(false);
                         setVisible(false);
-                        router.replace("/admin/business");
+                        router.push("/admin/business");
                     }
                 }
             )
@@ -425,7 +425,7 @@ const BusinessTable = () => {
                                 dataGoogle.map((value, key) => {
                                     return (
                                         <Table.Row key={1}>
-                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
+                                            <Table.Cell><p className="w-40 truncate ...">{value['name']}</p></Table.Cell>
                                             <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
                                             <Table.Cell>{value['gst_number']}</Table.Cell>
                                             <Table.Cell>

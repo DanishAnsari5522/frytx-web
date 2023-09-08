@@ -44,11 +44,11 @@ export const AddBusiness = () => {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.replace("/admin/business");
+                        router.reload();
                     } else if (data.status == true) {
                         setLoding(false);
                         setVisible(false);
-                        router.replace("/admin/business");
+                        router.reload();
                     }
                 }
             )
@@ -67,11 +67,11 @@ export const AddBusiness = () => {
                     if (data.status == false) {
                         alert("error occurs Plase Enter Valid Business")
                         setInformationText("error");
-                        router.replace("/admin/business");
+                        router.reload();
                     } else if (data.status == true) {
                         setLoding(false);
                         setVisible(false);
-                        router.replace("/admin/business");
+                        router.reload()
                     }
                 }
             )
