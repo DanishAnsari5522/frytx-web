@@ -288,13 +288,16 @@ const BusinessTable = () => {
     }, [])
     return (
         <>
-            <div className='flex'>
+            <div className='flex justify-between'>
+                <div className='flex w-1/2 items-center'>
+                    <p className='text-center text-lg font-medium'>My Business</p>
+                    <select value={cate} onChange={(e) => handleChange(e.target.value)} className='p-0 mb-0 border-2 rounded-xl ml-4 '>
+                        <option value='all'>All Business</option>
+                        <option value="india_mart">India Mart</option>
+                        <option value="google">Google</option>
+                    </select>
+                </div>
                 <AddBusiness />
-                <select value={cate} onChange={(e) => handleChange(e.target.value)} className='p-0 mb-2 w-1/4 border-2 rounded-xl ml-4'>
-                    <option value='all'>All Business</option>
-                    <option value="india_mart">India Mart</option>
-                    <option value="google">Google</option>
-                </select>
             </div>
 
             {/* for view modal start*/}
@@ -420,78 +423,89 @@ const BusinessTable = () => {
                             <Table.Column>Google/india mart</Table.Column>
                             <Table.Column>ACTIONS</Table.Column>
                         </Table.Header>
-                        <Table.Body>
-                            {
-                                dataGoogle.map((value, key) => {
-                                    return (
-                                        <Table.Row key={1}>
-                                            <Table.Cell><p className="w-40 truncate ...">{value['name']}</p></Table.Cell>
-                                            <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
-                                            <Table.Cell>{value['gst_number']}</Table.Cell>
-                                            <Table.Cell>
-                                                <p className='flex'>
-                                                    {dataStatus.map((value1, key1) => {
-                                                        return (
-                                                            <>
-                                                                {
-                                                                    value['gst_number'] == value1['gst_no'] ?
-                                                                        <p className='flex justify-between'>
-                                                                            {value1['india_mart'] == false ?
-                                                                                <Image
-                                                                                    src={Indiamartimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
-                                                                                :
-                                                                                <Image
-                                                                                    src={Indiamartimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 bg-blend-multiply border-4 border-indigo-600 ... bg-gradient-to-r from-cyan-500 to-blue-500' />
-                                                                            }
+                        {dataGoogle.length >= 1 ?
+                            <Table.Body>
+                                {
+                                    dataGoogle.map((value, key) => {
+                                        return (
+                                            <Table.Row key={1}>
+                                                <Table.Cell><p className="w-40 truncate ...">{value['name']}</p></Table.Cell>
+                                                <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
+                                                <Table.Cell>{value['gst_number']}</Table.Cell>
+                                                <Table.Cell>
+                                                    <p className='flex'>
+                                                        {dataStatus.map((value1, key1) => {
+                                                            return (
+                                                                <>
+                                                                    {
+                                                                        value['gst_number'] == value1['gst_no'] ?
+                                                                            <p className='flex justify-between'>
+                                                                                {value1['india_mart'] == false ?
+                                                                                    <Image
+                                                                                        src={Indiamartimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
+                                                                                    :
+                                                                                    <Image
+                                                                                        src={Indiamartimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full mr-2 bg-blend-multiply border-4 border-indigo-600 ... bg-gradient-to-r from-cyan-500 to-blue-500' />
+                                                                                }
 
 
-                                                                            {value1['google'] == false ?
-                                                                                <Image
-                                                                                    src={googleimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value['name'], value['gst_number']) }} />
-                                                                                :
-                                                                                <Image
-                                                                                    src={googleimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
-                                                                            }
+                                                                                {value1['google'] == false ?
+                                                                                    <Image
+                                                                                        src={googleimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value['name'], value['gst_number']) }} />
+                                                                                    :
+                                                                                    <Image
+                                                                                        src={googleimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
+                                                                                }
 
-                                                                            {value1['gst'] == false ?
-                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
-                                                                                :
-                                                                                <p className='p-2'>gst1</p>
-                                                                            }
+                                                                                {value1['gst'] == false ?
+                                                                                    <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
+                                                                                    :
+                                                                                    <p className='p-2'>gst1</p>
+                                                                                }
 
-                                                                        </p> : <p></p>
-                                                                }
-                                                            </>)
-                                                    })}
-                                                </p>
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
-                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
-                                            </Table.Cell>
-                                        </Table.Row>
-                                    )
-                                })
+                                                                            </p> : <p></p>
+                                                                    }
+                                                                </>)
+                                                        })}
+                                                    </p>
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
+                                                    <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
+                                                </Table.Cell>
+                                            </Table.Row>
+                                        )
+                                    })
 
-                            }
+                                }
 
-                        </Table.Body>
+                            </Table.Body>
+                            : <Table.Body>
+                                <Table.Row>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                </Table.Row>
+                            </Table.Body>
+                        }
                     </Table> :
                     <p></p>
             }
@@ -517,78 +531,90 @@ const BusinessTable = () => {
                             <Table.Column>Google/india mart</Table.Column>
                             <Table.Column>ACTIONS</Table.Column>
                         </Table.Header>
-                        <Table.Body>
-                            {
-                                dataIndiaMart.map((value, key) => {
-                                    return (
-                                        <Table.Row key={1}>
-                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
-                                            <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
-                                            <Table.Cell>{value['gst_number']}</Table.Cell>
-                                            <Table.Cell>
-                                                <p className='flex'>
-                                                    {dataStatus.map((value1, key1) => {
-                                                        return (
-                                                            <>
-                                                                {
-                                                                    value['gst_number'] == value1['gst_no'] ?
-                                                                        <p className='flex justify-between'>
-                                                                            {value1['india_mart'] == false ?
-                                                                                <Image
-                                                                                    src={Indiamartimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
-                                                                                :
-                                                                                <Image
-                                                                                    src={Indiamartimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 bg-blend-multiply border-4 border-indigo-600 ... bg-gradient-to-r from-cyan-500 to-blue-500' />
-                                                                            }
+                        {
+                            dataIndiaMart.length >= 1 ?
+                                <Table.Body>
+                                    {
+                                        dataIndiaMart.map((value, key) => {
+                                            return (
+                                                <Table.Row key={1}>
+                                                    <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
+                                                    <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
+                                                    <Table.Cell>{value['gst_number']}</Table.Cell>
+                                                    <Table.Cell>
+                                                        <p className='flex'>
+                                                            {dataStatus.map((value1, key1) => {
+                                                                return (
+                                                                    <>
+                                                                        {
+                                                                            value['gst_number'] == value1['gst_no'] ?
+                                                                                <p className='flex justify-between'>
+                                                                                    {value1['india_mart'] == false ?
+                                                                                        <Image
+                                                                                            src={Indiamartimg}
+                                                                                            width={50}
+                                                                                            height={50}
+                                                                                            alt="Picture of the author"
+                                                                                            className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
+                                                                                        :
+                                                                                        <Image
+                                                                                            src={Indiamartimg}
+                                                                                            width={50}
+                                                                                            height={50}
+                                                                                            alt="Picture of the author"
+                                                                                            className='object-cover rounded-full mr-2 bg-blend-multiply border-4 border-indigo-600 ... bg-gradient-to-r from-cyan-500 to-blue-500' />
+                                                                                    }
 
 
-                                                                            {value1['google'] == false ?
-                                                                                <Image
-                                                                                    src={googleimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value['name'], value['gst_number']) }} />
-                                                                                :
-                                                                                <Image
-                                                                                    src={googleimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
-                                                                            }
+                                                                                    {value1['google'] == false ?
+                                                                                        <Image
+                                                                                            src={googleimg}
+                                                                                            width={50}
+                                                                                            height={50}
+                                                                                            alt="Picture of the author"
+                                                                                            className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value['name'], value['gst_number']) }} />
+                                                                                        :
+                                                                                        <Image
+                                                                                            src={googleimg}
+                                                                                            width={50}
+                                                                                            height={50}
+                                                                                            alt="Picture of the author"
+                                                                                            className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
+                                                                                    }
 
-                                                                            {value1['gst'] == false ?
-                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
-                                                                                :
-                                                                                <p className='p-2'>gst1</p>
-                                                                            }
+                                                                                    {value1['gst'] == false ?
+                                                                                        <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
+                                                                                        :
+                                                                                        <p className='p-2'>gst1</p>
+                                                                                    }
 
-                                                                        </p> : <p></p>
-                                                                }
-                                                            </>)
-                                                    })}
-                                                </p>
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
-                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
-                                            </Table.Cell>
-                                        </Table.Row>
-                                    )
-                                })
+                                                                                </p> : <p></p>
+                                                                        }
+                                                                    </>)
+                                                            })}
+                                                        </p>
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
+                                                        <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
+                                                    </Table.Cell>
+                                                </Table.Row>
+                                            )
+                                        })
 
-                            }
+                                    }
 
-                        </Table.Body>
+                                </Table.Body>
+                                : <Table.Body>
+                                    <Table.Row>
+                                        <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                        <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                        <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                        <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                        <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                        }
                     </Table> :
                     <p></p>
             }
@@ -612,76 +638,87 @@ const BusinessTable = () => {
                             <Table.Column>Google/india mart</Table.Column>
                             <Table.Column>ACTIONS</Table.Column>
                         </Table.Header>
-                        <Table.Body>
-                            {
-                                dataAllInd.map((value, key) => {
-                                    return (
-                                        <Table.Row key={1}>
-                                            <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
-                                            <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
-                                            <Table.Cell>{value['gst_number']}</Table.Cell>
-                                            <Table.Cell>
-                                                <p className='flex'>
-                                                    {dataStatus.map((value1, key1) => {
-                                                        return (
-                                                            <>
-                                                                {
-                                                                    value['gst_number'] == value1['gst_no'] ?
-                                                                        <p className='flex justify-between'>
-                                                                            {value1['india_mart'] == false ?
-                                                                                <Image
-                                                                                    src={Indiamartimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
-                                                                                :
-                                                                                <Image
-                                                                                    src={Indiamartimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 bg-blend-multiply border-4 border-indigo-600 ... bg-gradient-to-r from-cyan-500 to-blue-500' />
-                                                                            }
+                        {dataAllInd.length >= 1 ?
+                            <Table.Body>
+                                {
+                                    dataAllInd.map((value, key) => {
+                                        return (
+                                            <Table.Row key={1}>
+                                                <Table.Cell><p className="w-40 truncate ...">{key + 1 + value['name']}</p></Table.Cell>
+                                                <Table.Cell><p className="w-40 truncate ...">{value['location']}{value['address']}</p></Table.Cell>
+                                                <Table.Cell>{value['gst_number']}</Table.Cell>
+                                                <Table.Cell>
+                                                    <p className='flex'>
+                                                        {dataStatus.map((value1, key1) => {
+                                                            return (
+                                                                <>
+                                                                    {
+                                                                        value['gst_number'] == value1['gst_no'] ?
+                                                                            <p className='flex justify-between'>
+                                                                                {value1['india_mart'] == false ?
+                                                                                    <Image
+                                                                                        src={Indiamartimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full mr-2 cursor-pointer' onClick={() => { handler('india_mart', value['name'], value['gst_number']) }} />
+                                                                                    :
+                                                                                    <Image
+                                                                                        src={Indiamartimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full mr-2 bg-blend-multiply border-4 border-indigo-600 ... bg-gradient-to-r from-cyan-500 to-blue-500' />
+                                                                                }
 
 
-                                                                            {value1['google'] == false ?
-                                                                                <Image
-                                                                                    src={googleimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value[name], value['gst_number']) }} />
-                                                                                :
-                                                                                <Image
-                                                                                    src={googleimg}
-                                                                                    width={50}
-                                                                                    height={50}
-                                                                                    alt="Picture of the author"
-                                                                                    className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
-                                                                            }
+                                                                                {value1['google'] == false ?
+                                                                                    <Image
+                                                                                        src={googleimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full cursor-pointer mr-2 ml-2' onClick={() => { handler('google', value[name], value['gst_number']) }} />
+                                                                                    :
+                                                                                    <Image
+                                                                                        src={googleimg}
+                                                                                        width={50}
+                                                                                        height={50}
+                                                                                        alt="Picture of the author"
+                                                                                        className='object-cover rounded-full mr-2 ml-2 border-green-500 bg-green-400 mr-4' />
+                                                                                }
 
-                                                                            {value1['gst'] == false ?
-                                                                                <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
-                                                                                :
-                                                                                <p className='p-2'>gst1</p>
-                                                                            }
+                                                                                {value1['gst'] == false ?
+                                                                                    <p className='pl-2 cursor-pointer' onClick={() => { listByGST(value['name'], value['gst_number']) }}>gst</p>
+                                                                                    :
+                                                                                    <p className='p-2'>gst1</p>
+                                                                                }
 
-                                                                        </p> : <p></p>
-                                                                }
-                                                            </>)
-                                                    })}
-                                                </p>
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
-                                                <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
-                                            </Table.Cell>
-                                        </Table.Row>
-                                    )
-                                })
-                            }
-                        </Table.Body>
+                                                                            </p> : <p></p>
+                                                                    }
+                                                                </>)
+                                                        })}
+                                                    </p>
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    <Link href={{ pathname: '/admin/businessdetail', query: { id: value['gst_number'] } }}><button><EyeIcon size={20} fill="#979797" /></button></Link>
+                                                    <Link href={{ pathname: '/admin/accountupdate', query: { id: value['_id'] } }}><button><DeleteIcon size={20} fill="#FF0080" className="ml-4" height={undefined} width={undefined} /></button></Link>
+                                                </Table.Cell>
+                                            </Table.Row>
+                                        )
+                                    })
+                                }
+                            </Table.Body>
+                            : <Table.Body>
+                                <Table.Row>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                    <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                                </Table.Row>
+                            </Table.Body>
+                        }
                     </Table> :
                     <p></p>
             }

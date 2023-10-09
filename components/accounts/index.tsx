@@ -22,6 +22,7 @@ const columns = [
 
 export const Accounts = () => {
    const router = useRouter()
+   const [lod, setLod] = useState([]);
    const [data1, setData1] = useState([]);
    const [visibleView, setVisibleView] = React.useState(false);
    const [visibleEdit, setVisibleEdit] = React.useState(false);
@@ -297,30 +298,38 @@ export const Accounts = () => {
                      <Table.Column>PHONE</Table.Column>
                      <Table.Column>ACTIONS</Table.Column>
                   </Table.Header>
-                  <Table.Body>
-                     {data1.map((value, ind) => {
-                        return (
-                           <Table.Row key={ind}>
-                              <Table.Cell>{value['name']}</Table.Cell>
-                              <Table.Cell>{value['email']}</Table.Cell>
-                              <Table.Cell>{value['phone']}</Table.Cell>
-                              <Table.Cell>
-                                 <button onClick={() => { handlerView(value['_id']) }}><EyeIcon size={20} fill="#979797" /></button>
+                  {
+                     data1.length >= 1 ?
+                        <Table.Body>
+                           {data1.map((value, ind) => {
+                              return (
+                                 <Table.Row key={ind}>
+                                    <Table.Cell>{value['name']}</Table.Cell>
+                                    <Table.Cell>{value['email']}</Table.Cell>
+                                    <Table.Cell>{value['phone']}</Table.Cell>
+                                    <Table.Cell>
+                                       <button onClick={() => { handlerView(value['_id']) }}><EyeIcon size={20} fill="#979797" /></button>
 
-                                 <button onClick={() => { handlerEdit(value['_id']) }}><EditIcon size={20} fill="#357a38" className="ml-3" /></button>
+                                       <button onClick={() => { handlerEdit(value['_id']) }}><EditIcon size={20} fill="#357a38" className="ml-3" /></button>
 
 
-                                 <button><DeleteIcon size={20} fill="#FF0080" className="ml-3" /></button>
-                              </Table.Cell>
+                                       <button><DeleteIcon size={20} fill="#FF0080" className="ml-3" /></button>
+                                    </Table.Cell>
+                                 </Table.Row>
+                              )
+                           })}
+                        </Table.Body>
+                        : <Table.Body>
+                           <Table.Row>
+                              <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                              <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                              <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
+                              <Table.Cell>Loading<Loading type="points" size="sm" className='text-white  bg-blue-600 w-full py-3 rounded-md mt-4' /></Table.Cell>
                            </Table.Row>
-                        )
-                     })}
-
-                  </Table.Body>
+                        </Table.Body>
+                  }
                </Table>
-
             </div>
-
          </Flex>
          {/* <ReactTabulator
             data={data1}

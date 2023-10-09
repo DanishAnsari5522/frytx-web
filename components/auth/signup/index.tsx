@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { Auth } from 'firebase/auth';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import LandingPageHeader from '../../navbar/landingpage-header';
 const SignupComp = () => {
     const router = useRouter();

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Button, Divider, Input, Modal, Text, Loading, Radio } from '@nextui-org/react';
 import { Flex } from '../styles/flex';
+import Link from 'next/link';
 export const AddBusiness = () => {
     const router = useRouter()
     const [visible, setVisible] = React.useState(false);
@@ -79,9 +80,10 @@ export const AddBusiness = () => {
     };
     return (
         <div>
-            <button onClick={handler} className='text-white mb-4 bg-blue-400 pl-3 pr-3 pt-2 pb-2 rounded-xl'>
-                Add Business
-            </button>
+            {/* <button onClick={handler} >
+                + Add Business
+            </button> */}
+            <Link href="/admin/addBusiness"><p className='text-white mb-4 bg-amber-500 pl-3 pr-3 pt-2 pb-2 rounded-md cursor-pointer'> + Add Business</p></Link>
             <Modal
                 closeButton
                 aria-labelledby="modal-title"
